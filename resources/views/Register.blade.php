@@ -1,11 +1,9 @@
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Registration Form</title>
+  <title>Sign Up</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
@@ -22,52 +20,58 @@ session_start();
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-                      <form class="mx-1 mx-md-4">
-
+                      <form class="mx-1 mx-md-4" method="POST" action="/register">
+                        @csrf
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" class="form-control" />
-                            <label class="form-label" for="form3Example1c">Your Name</label>
+                            <input type="text" id="YourName" class="form-control" name="name" value="{{ old('name') }}"/>
+                            <label class="form-label" for="Yourname">Your Name</label>
                           </div>
                         </div>
 
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <input type="email" id="form3Example3c" class="form-control" />
-                            <label class="form-label" for="form3Example3c">Your Email</label>
+                            <input type="email" id="YourEmail" class="form-control" name="email" value="{{ old('email') }}" />
+                            <label class="form-label" for="YourEmail">Your Email</label>
                           </div>
                         </div>
 
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <input type="password" id="form3Example4c" class="form-control" />
-                            <label class="form-label" for="form3Example4c">Password</label>
+                            <input type="password" id="password" class="form-control" name="password" />
+                            <label class="form-label" for="password">Password</label>
                           </div>
                         </div>
 
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <input type="password" id="form3Example4cd" class="form-control" />
-                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                            <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" />
+                            <label class="form-label" for="password_confirmation" >Repeat your password</label>
                           </div>
                         </div>
-
                         <div class="form-check d-flex justify-content-center mb-5">
-                          <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                          <label class="form-check-label" for="form2Example3">
+                            <input type="hidden" name="terms" value="0">
+                            <input class="form-check-input me-2" type="checkbox" value="1" name="terms" id="terms" {{ old('terms') ? 'checked' : '' }} />
                             I agree all statements in <a href="#!">Terms of service</a>
                           </label>
                         </div>
-
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Register</button>
+                          <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Register</button>
                         </div>
-
                       </form>
 
                     </div>
