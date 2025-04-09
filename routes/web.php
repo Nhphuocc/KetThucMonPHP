@@ -6,3 +6,5 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/home', [AuthController::class, 'home'])->name('home');
+Route::get('/sach/{id}', [AuthController::class, 'showchitiet'])->name('chitiet');

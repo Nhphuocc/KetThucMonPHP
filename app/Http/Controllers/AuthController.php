@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\tensach;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+            return redirect('/home')->with('success', 'Đăng nhập thành công!');
         }
         return back()->withErrors([
             'email' => 'Email hoặc mật khẩu không đúng.',
@@ -56,5 +57,20 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/login')->with('success', 'Bạn đã đăng xuất.');
+    }
+
+
+
+    public function home()
+    {
+
+        $danhsach = tensach::with('tacgia')->get();
+        return view('home', compact('danhsach'));
+    }
+
+    public function showchitiet($id)
+    {
+        $sach = tensach::findOrFail($id);
+        return view('chitiet', compact('sach'));
     }
 }
