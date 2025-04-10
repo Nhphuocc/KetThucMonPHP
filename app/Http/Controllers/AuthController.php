@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\tensach;
+use App\Models\tacgia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -69,8 +70,8 @@ class AuthController extends Controller
     public function home()
     {
 
-        $danhsach = tensach::with('tacgia')->get();
-        return view('home', compact('danhsach'));
+        $danhsach_sach = tensach::with('tacgia')->get();
+        return view('home', compact('danhsach_sach'));
     }
     public function showchitiet($id)
     {
@@ -81,8 +82,43 @@ class AuthController extends Controller
 
     public function admin()
     {
-
-        $danhsach = tensach::with('tacgia')->get();
-        return view('home', compact('danhsach'));
+        $danhsach_sach = tensach::with('tacgia')->get();
+        $danhsach_tacgia = tacgia::all();
+        return view('admin', compact('danhsach_sach','danhsach_tacgia'));
     }
+
+
+    public function destroy($id)
+    {
+    $sach = tensach::findOrFail($id);
+    $sach->delete();
+    return redirect()->route('admin')->with('success', 'Đã xoá sách thành công!');
+    }
+
+
+
+
+    public function edit($id)
+{
+    $sach = tensach::findOrFail($id);
+    $tacgiaList = tacgia::all();
+    return view('editbook', compact('sach', 'tacgiaList'));
 }
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'ten' => 'required|string|max:255',
+        'tacgia_id' => 'required|exists:tacgia,id',
+    ]);
+
+    $sach = tensach::findOrFail($id);
+    $sach->ten = $request->ten;
+    $sach->tacgia_id = $request->tacgia_id;
+    $sach->save();
+    return redirect()->route('admin')->with('success', 'Đã cập nhật sách thành công!');
+}
+}
+
+
+

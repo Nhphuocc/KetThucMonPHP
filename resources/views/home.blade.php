@@ -19,7 +19,7 @@
                 <th>Tác giả</th>
                 <th>Chi tiết</th>
             </tr>
-            @foreach ($danhsach as $home => $sach)
+            @foreach ($danhsach_sach as $home => $sach)
                 <tr>
                 <td>{{ $home + 1 }}</td>
                 <td>{{ $sach->ten_sach }}</td>
