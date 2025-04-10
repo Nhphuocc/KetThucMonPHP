@@ -5,3 +5,4 @@
 <p><strong>Mô tả:</strong> {!! nl2br(e($sach->Noi_dung)) !!}</p>
 
 <a href="{{ route('home') }}">← Quay lại danh sách</a>
+

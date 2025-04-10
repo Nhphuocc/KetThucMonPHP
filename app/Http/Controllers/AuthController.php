@@ -28,9 +28,10 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+
         ]);
         Auth::login($user);
-        return redirect('/login')->with('success', 'Đăng ký thành công!');
+        return redirect('/')->with('success', 'Đăng ký thành công!');
     }
 
 
@@ -47,7 +48,11 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect('/home')->with('success', 'Đăng nhập thành công!');
+
+            if(auth()->user()->is_admin == true)
+                return redirect('/admin')->with('success', 'Đăng nhập thành công!');
+            else
+                return redirect('/home')->with('success', 'Đăng nhập thành công!');
         }
         return back()->withErrors([
             'email' => 'Email hoặc mật khẩu không đúng.',
@@ -56,7 +61,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/login')->with('success', 'Bạn đã đăng xuất.');
+        return redirect('/')->with('success', 'Bạn đã đăng xuất.');
     }
 
 
@@ -67,10 +72,17 @@ class AuthController extends Controller
         $danhsach = tensach::with('tacgia')->get();
         return view('home', compact('danhsach'));
     }
-
     public function showchitiet($id)
     {
         $sach = tensach::findOrFail($id);
         return view('chitiet', compact('sach'));
+    }
+
+
+    public function admin()
+    {
+
+        $danhsach = tensach::with('tacgia')->get();
+        return view('home', compact('danhsach'));
     }
 }
