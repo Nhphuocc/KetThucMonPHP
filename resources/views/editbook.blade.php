@@ -1,4 +1,12 @@
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit</title>
+</head>
+<body>
 <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
     <h1 class="text-2xl font-semibold mb-4">📝 Chỉnh sửa sách</h1>
     <form method="POST" action="{{ route('updatebook', $sach->id) }}">
@@ -6,14 +14,14 @@
         @method('PUT')
         <div class="mb-4">
             <label class="block">Tên sách</label>
-            <input type="text" name="ten" value="{{ old('ten', $sach->ten) }}" class="w-full border px-3 py-2 rounded" required>
+            <input type="text" name="ten" value="{{ old('ten', $sach->ten_sach) }}" class="w-full border px-3 py-2 rounded" required>
         </div>
         <div class="mb-4">
             <label class="block">Tác giả</label>
             <select name="tacgia_id" class="w-full border px-3 py-2 rounded" required>
                 @foreach ($tacgiaList as $tg)
                     <option value="{{ $tg->id }}" @if($tg->id == $sach->tacgia_id) selected @endif>
-                        {{ $tg->ten }}
+                        {{ $tg->name }}
                     </option>
                 @endforeach
             </select>
@@ -25,4 +33,5 @@
         </div>
     </form>
 </div>
-@endsection
+</body>
+</html>

@@ -31,13 +31,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit">Xóa</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{route('editbook',$sach->id)}}" method="POST">
-                        @csrf
-                        @method("PUT")
-                        <button type="submit">Sửa</button>
+                        <a href="{{route('editbook',$sach->id)}}">Sửa</a>
                     </form>
                 </td>
                 </tr>
