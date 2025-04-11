@@ -14,7 +14,7 @@
         @method('PUT')
         <div class="mb-4">
             <label class="block">Tên sách</label>
-            <input type="text" name="ten" value="{{ old('ten', $sach->ten_sach) }}" class="w-full border px-3 py-2 rounded" required>
+            <input type="text" name="tenmoi" value="{{ old('tensach', $sach->ten_sach) }}" class="w-full border px-3 py-2 rounded" required>
         </div>
         <div class="mb-4">
             <label class="block">Tác giả</label>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex gap-4">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">💾 Cập nhật</button>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded" >💾 Cập nhật</button>
             <a href="{{ route('admin') }}" class="bg-gray-300 px-4 py-2 rounded">🔙 Quay lại</a>
         </div>
     </form>

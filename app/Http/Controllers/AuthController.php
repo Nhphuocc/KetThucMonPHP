@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('register');
+        return view('page/register');
     }
     public function register(Request $request)
     {
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('login');
+        return view('page/login');
     }
     public function login(Request $request)
     {
@@ -71,12 +71,12 @@ class AuthController extends Controller
     {
 
         $danhsach_sach = tensach::with('tacgia')->get();
-        return view('home', compact('danhsach_sach'));
+        return view('page/home', compact('danhsach_sach'));
     }
     public function showchitiet($id)
     {
         $sach = tensach::findOrFail($id);
-        return view('chitiet', compact('sach'));
+        return view('book/chitiet', compact('sach'));
     }
 
 
@@ -84,7 +84,7 @@ class AuthController extends Controller
     {
         $danhsach_sach = tensach::with('tacgia')->get();
         $danhsach_tacgia = tacgia::all();
-        return view('admin', compact('danhsach_sach','danhsach_tacgia'));
+        return view('page/admin', compact('danhsach_sach','danhsach_tacgia'));
     }
 
 
@@ -92,7 +92,9 @@ class AuthController extends Controller
     {
     $sach = tensach::findOrFail($id);
     $sach->delete();
-    return redirect()->route('admin')->with('success', 'Đã xoá sách thành công!');
+    $tacgia = tacgia::findOrFail($id);
+    $tacgia->delete();
+    return redirect()->route('admin')->with('success', 'Đã xoá thành công!');
     }
 
 
@@ -102,23 +104,48 @@ class AuthController extends Controller
 {
     $sach = tensach::findOrFail($id);
     $tacgiaList = tacgia::all();
-    return view('editbook', compact('sach', 'tacgiaList'));
+    return view('book/editbook', compact('sach', 'tacgiaList'));
 }
 
 public function update(Request $request, $id)
 {
     $request->validate([
-        'ten' => 'required|string|max:255',
+        'tenmoi' => 'required|string|max:255',
         'tacgia_id' => 'required|exists:tacgia,id',
     ]);
 
     $sach = tensach::findOrFail($id);
-    $sach->ten = $request->ten;
+    $sach->ten_sach = $request->tenmoi;
     $sach->tacgia_id = $request->tacgia_id;
     $sach->save();
     return redirect()->route('admin')->with('success', 'Đã cập nhật sách thành công!');
 }
+
+
+
+
+public function showcreatebook()
+{
+    $tacgiaList = tacgia::all();
+    return view('book.addbook', compact('tacgiaList'));
 }
+public function createBook(Request $request)
+{
+    $request->validate([
+        'ten_sach' => 'required|string|max:255',
+        'tacgia_id' => 'required|exists:tacgia,id',
+        'Noi_dung' => 'required|string',
+    ]);
+
+    $sachmoi = new tensach();
+    $sachmoi->ten_sach = $request->ten_sach;
+    $sachmoi->tacgia_id = $request->tacgia_id;
+    $sachmoi->Noi_dung = $request->Noi_dung;
+    $sachmoi->save();
+    return redirect()->route('admin')->with('success', 'Đã thêm sách thành công!');
+}
+}
+
 
 
 
