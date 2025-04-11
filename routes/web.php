@@ -16,4 +16,4 @@ Route::delete('/tacgia/{id}', [AuthController::class, 'destroy'])->name('deletet
 Route::get('/sach/{id}/edit', [AuthController::class, 'edit'])->name('editbook');
 Route::put('/sach/{id}', [AuthController::class, 'update'])->name('updatebook');
 
-
+Route::get('/admintest', [AuthController::class, 'admintest'])->name('admintest');

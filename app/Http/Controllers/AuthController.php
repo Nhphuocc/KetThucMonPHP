@@ -86,6 +86,12 @@ class AuthController extends Controller
         $danhsach_tacgia = tacgia::all();
         return view('page/admin', compact('danhsach_sach','danhsach_tacgia'));
     }
+    public function admintest()
+    {
+        $danhsach_sach = tensach::with('tacgia')->get();
+        $danhsach_tacgia = tacgia::all();
+        return view('page/admintest', compact('danhsach_sach','danhsach_tacgia'));
+    }
 
 
     public function destroy($id)
