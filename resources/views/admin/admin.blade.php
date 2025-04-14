@@ -1,7 +1,8 @@
+<title>Admin</title>
 @extends('layouts.layouts')
 @section('content')
       <div class="container-scroller">
-        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 d-flex align-items-top flex-row">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
             <div class="me-3">
               <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
@@ -166,13 +167,11 @@
               </li>
             </ul>
           </nav>
-
-
-          <div class="container mt-4">
+        <div class="container mt-4">
             <div class="d-flex justify-content-end mb-3">
-              <a href="{{route('showaddbook')}}" class="btn btn-success">Thêm danh sách</a>
+                <button class="btn btn-success" data-toggle="modal" data-target="#createBookModal">Thêm sách</button>
             </div>
-          <div class="container-fluid" >
+           <div class="container-fluid" >
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover ">
                 <thead class="table-dark text-center">
@@ -193,7 +192,7 @@
                     <td>{{ $sach->tacgia->name ?? 'Chưa có tác giả' }}</td>
                     <td><a href="{{ route('chitiet', $sach->id) }}">Chi Tiết</a></td>
                     <td>
-                    <a href="{{route('editbook',$sach->id)}}" class="btn btn-sm btn-warning">Sửa</a>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editBookModal{{$sach->id}}">Sửa</button>
                         <form action="{{route('deletebook',$sach->id)}}" style="display:inline;" method="POST" onsubmit="return confirm('Bạn chắc muốn xoá không?');">
                             @csrf
                             @method('DELETE')
@@ -201,9 +200,7 @@
                         </form>
                     </td>
                     </tr>
+                    @include('book.edit-modal', ['sach' => $sach, 'tacgia' => $danhsach_tacgia])
                 @endforeach
-                </tbody>
-                </table>
-            </div>
-        </div>
+                @include('book.add-modal', ['tacgia' => $danhsach_tacgia])
 @endsection

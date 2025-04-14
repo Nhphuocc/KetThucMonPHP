@@ -13,4 +13,8 @@ class tacgia extends Model
     {
         return $this->hasMany(tensach::class, 'tacgia_id');
     }
+    protected $fillable = [
+        'name',
+        'ngay_sinh',
+    ];
 }

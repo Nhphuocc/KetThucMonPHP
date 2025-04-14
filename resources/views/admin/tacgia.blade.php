@@ -1,3 +1,4 @@
+<title>Tác Giả</title>
 @extends('layouts.layouts')
 @section('content')
       <div class="container-scroller">
@@ -169,7 +170,7 @@
 
           <div class="container mt-4">
             <div class="d-flex justify-content-end mb-3">
-              <a href="{{route('showaddbook')}}" class="btn btn-success">Thêm tác giả</a>
+              <a  class="btn btn-success">Thêm tác giả</a>
             </div>
           <div class="container-fluid" >
             <div class="table-responsive">
@@ -198,10 +199,8 @@
                     </form>
                 </td>
                 </tr>
+                @include('tacgia.edit-modal')
             @endforeach
-                </tbody>
-                </table>
-            </div>
-        </div>
 @endsection
+
 

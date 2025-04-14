@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>KetThucMon</title>
     <link rel="stylesheet" href="../assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../assets/vendors/ti-icons/css/themify-icons.css">
@@ -26,26 +25,34 @@
             text-align: right;
             padding: 10px;
         }
+        .navbar {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+        }
+        .modal-content {
+    display: block;
+}
     </style>
   </head>
-    <body >
+    <body class="with-welcome-text">
         @yield('content')
         <footer>
             <p>&copy; By Hoang Phuoc</p>
         </footer>
-      <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
-      <script src="../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-      <script src="../assets/vendors/chart.js/chart.umd.js"></script>
-      <script src="../assets/vendors/progressbar.js/progressbar.min.js"></script>
-      <script src="../assets/js/off-canvas.js"></script>
-      <script src="../assets/js/template.js"></script>
-      <script src="../assets/js/settings.js"></script>
-      <script src="../assets/js/hoverable-collapse.js"></script>
-      <script src="../assets/js/todolist.js"></script>
-      <script src="../assets/js/jquery.cookie.js" type="text/javascript"></script>
-      <script src="../assets/js/dashboard.js"></script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../assets/vendors/chart.js/chart.umd.js"></script>
+    <script src="../assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="../assets/js/off-canvas.js"></script>
+    <script src="../assets/js/template.js"></script>
+    <script src="../assets/js/settings.js"></script>
+    <script src="../assets/js/hoverable-collapse.js"></script>
+    <script src="../assets/js/todolist.js"></script>
+    <script src="../assets/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../assets/js/dashboard.js"></script>
+
   </body>
 </html>

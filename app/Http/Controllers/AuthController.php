@@ -68,17 +68,34 @@ class AuthController extends Controller
     public function editTacGia(Request $request,$id)
 {
     $request->validate([
-        'ten_tac_gia' => 'required|string|max:255',
+        'name' => 'required|string|max:255',
         'ngay_sinh' => 'required|date',
     ]);
-    $tacGia = tacgia::findOrFail($id);
-    tacgia->update([
-        'ten_tac_gia' => $request->name,
+    $tacgia = tacgia::findOrFail($id);
+    $tacgia->update([
+        'name' => $request->name,
         'ngay_sinh' => $request->ngay_sinh,
     ]);
     return redirect()->back()->with('success', 'Tác giả đã được cập nhật');
 }
-
+    public function editSach(Request $request,$id)
+{
+    $request->validate([
+        'ten_sach' => 'required|string|max:255',
+        'tacgia_id' => 'required|integer',
+    ]);
+    $sach = tensach::findOrFail($id);
+    $sach->ten_sach = $request->ten_sach;
+    $sach->tacgia_id = $request->tacgia_id;
+    $sach->save();
+    return redirect()->back()->with('success', 'Sách đã được cập nhật');
+}
+    public function showSach()
+    {
+        $sach = tensach::with('tacgia')->get();
+        $tacgia = tacgia::all();
+        return view('admin.admin', compact('sach', 'tacgia'));
+    }
 
     public function home()
     {
@@ -126,56 +143,20 @@ class AuthController extends Controller
     return redirect()->route('showTacGia')->with('success', 'Đã xoá thành công!');
     }
 
-
-
-
-
-    public function edit($id)
-{
-    $sach = tensach::findOrFail($id);
-    $tacgiaList = tacgia::all();
-    return view('book/editbook', compact('sach', 'tacgiaList'));
-}
-
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'tenmoi' => 'required|string|max:255',
-        'tacgia_id' => 'required|exists:tacgia,id',
-    ]);
-
-    $sach = tensach::findOrFail($id);
-    $sach->ten_sach = $request->tenmoi;
-    $sach->tacgia_id = $request->tacgia_id;
-    $sach->save();
-    return redirect()->route('admin')->with('success', 'Đã cập nhật sách thành công!');
-}
-
-
-
-
-
-
-public function showcreatebook()
-{
-    $tacgiaList = tacgia::all();
-    return view('book.addbook', compact('tacgiaList'));
-}
-public function createBook(Request $request)
-{
+    public function addBook(Request $request)
+    {
     $request->validate([
         'ten_sach' => 'required|string|max:255',
         'tacgia_id' => 'required|exists:tacgia,id',
         'Noi_dung' => 'required|string',
     ]);
-
     $sachmoi = new tensach();
     $sachmoi->ten_sach = $request->ten_sach;
     $sachmoi->tacgia_id = $request->tacgia_id;
     $sachmoi->Noi_dung = $request->Noi_dung;
     $sachmoi->save();
     return redirect()->route('admin')->with('success', 'Đã thêm sách thành công!');
-}
+    }
 }
 
 
