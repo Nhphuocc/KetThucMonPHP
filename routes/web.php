@@ -11,9 +11,15 @@ Route::get('/sach/create', [AuthController::class, 'showcreatebook'])->name('sho
 Route::post('/sach', [AuthController::class, 'createBook'])->name('createBook');
 Route::get('/sach/{id}', [AuthController::class, 'showchitiet'])->name('chitiet');
 Route::get('/admin', [AuthController::class, 'admin'])->name('admin');
-Route::delete('/sach/{id}', [AuthController::class, 'destroy'])->name('deletebook');
-Route::delete('/tacgia/{id}', [AuthController::class, 'destroy'])->name('deletetacgia');
+Route::get('/showtacgia', [AuthController::class, 'showTacGia'])->name('showTacGia');
+Route::get('/showUser', [AuthController::class, 'showUser'])->name('showUser');
+Route::delete('/sach/{id}', [AuthController::class, 'destroySach'])->name('deletebook');
+Route::delete('/tacgia/{id}', [AuthController::class, 'destroyTacgia'])->name('deletetacgia');
 Route::get('/sach/{id}/edit', [AuthController::class, 'edit'])->name('editbook');
 Route::put('/sach/{id}', [AuthController::class, 'update'])->name('updatebook');
+Route::get('/tacgia/{id}/edit', [AuthController::class, 'editTacGia'])->name('editTacGia');
+Route::post('/tacgia/{id}/update', [AuthController::class, 'updateTacGia'])->name('updateTacGia');
 
-Route::get('/admintest', [AuthController::class, 'admintest'])->name('admintest');
+
+
+

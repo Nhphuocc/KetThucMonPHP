@@ -84,24 +84,35 @@ class AuthController extends Controller
     {
         $danhsach_sach = tensach::with('tacgia')->get();
         $danhsach_tacgia = tacgia::all();
-        return view('page/admin', compact('danhsach_sach','danhsach_tacgia'));
+        return view('admin/admin', compact('danhsach_sach','danhsach_tacgia'));
     }
-    public function admintest()
+    public function showTacGia()
     {
-        $danhsach_sach = tensach::with('tacgia')->get();
         $danhsach_tacgia = tacgia::all();
-        return view('page/admintest', compact('danhsach_sach','danhsach_tacgia'));
+        return view('admin/tacgia', compact('danhsach_tacgia'));
+    }
+    public function showUser()
+    {
+        $user = user::all();
+        return view('admin/user', compact('user'));
     }
 
 
-    public function destroy($id)
+
+    public function destroySach($id)
     {
     $sach = tensach::findOrFail($id);
     $sach->delete();
-    $tacgia = tacgia::findOrFail($id);
-    $tacgia->delete();
     return redirect()->route('admin')->with('success', 'Đã xoá thành công!');
     }
+
+    public function destroyTacgia($id)
+    {
+    $tacgia = tacgia::findOrFail($id);
+    $tacgia->delete();
+    return redirect()->route('showTacGia')->with('success', 'Đã xoá thành công!');
+    }
+
 
 
 
@@ -127,6 +138,25 @@ public function update(Request $request, $id)
     return redirect()->route('admin')->with('success', 'Đã cập nhật sách thành công!');
 }
 
+
+public function editTacGia($id)
+{
+    $tacgia = tacgia::findOrFail($id);
+    return view('tacgia.editTacGia', compact('tacgia'));
+}
+
+public function updateTacGia(Request $request, $id)
+{
+    $request->validate([
+        'tentacgia' => 'required|string|max:255',
+    ]);
+
+    $tacgia = tacgia::findOrFail($id);
+    $tacgia->name = $request->tentacgia;
+    $tacgia->save();
+
+    return redirect()->route('showTacGia')->with('success', 'Cập nhật tác giả thành công!');
+}
 
 
 

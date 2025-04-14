@@ -1,7 +1,7 @@
 (function($) {
   'use strict';
   $(function() {
-    if ($("#performanceLine").length) { 
+    if ($("#performanceLine").length) {
       const ctx = document.getElementById('performanceLine');
       var graphGradient = document.getElementById("performanceLine").getContext('2d');
       var graphGradient2 = document.getElementById("performanceLine").getContext('2d');
@@ -54,7 +54,7 @@
                 tension: 0.4,
             }
           },
-        
+
           scales: {
             y: {
               border: {
@@ -120,7 +120,7 @@
       });
     }
 
-    if ($("#status-summary").length) { 
+    if ($("#status-summary").length) {
       const statusSummaryChartCanvas = document.getElementById('status-summary');
       new Chart(statusSummaryChartCanvas, {
         type: 'line',
@@ -177,7 +177,7 @@
       });
     }
 
-    if ($("#marketingOverview").length) { 
+    if ($("#marketingOverview").length) {
       const marketingOverviewCanvas = document.getElementById('marketingOverview');
       new Chart(marketingOverviewCanvas, {
         type: 'bar',
@@ -193,7 +193,7 @@
               borderWidth: 0,
               barPercentage: 0.35,
               fill: true, // 3: no fill
-              
+
           },{
             label: 'This week',
             data: [215, 290, 210, 250, 290, 230, 290, 210, 280, 220, 190, 300],
@@ -214,7 +214,7 @@
                 tension: 0.4,
             }
         },
-        
+
           scales: {
             y: {
               border: {
@@ -288,7 +288,7 @@
         // This has to be the same size as the maximum width to
         // prevent clipping
         strokeWidth: 15,
-        trailWidth: 15, 
+        trailWidth: 15,
         easing: 'easeInOut',
         duration: 1400,
         text: {
@@ -306,17 +306,17 @@
         step: function(state, circle) {
           circle.path.setAttribute('stroke', state.color);
           circle.path.setAttribute('stroke-width', state.width);
-  
+
           var value = Math.round(circle.value() * 100);
           if (value === 0) {
             circle.setText('');
           } else {
             circle.setText(value);
           }
-  
+
         }
       });
-  
+
       bar.text.style.fontSize = '0rem';
       bar.animate(.64); // Number from 0.0 to 1.0
     }
@@ -345,22 +345,22 @@
         step: function(state, circle) {
           circle.path.setAttribute('stroke', state.color);
           circle.path.setAttribute('stroke-width', state.width);
-  
+
           var value = Math.round(circle.value() * 100);
           if (value === 0) {
             circle.setText('');
           } else {
             circle.setText(value);
           }
-  
+
         }
       });
-  
+
       bar.text.style.fontSize = '0rem';
       bar.animate(.34); // Number from 0.0 to 1.0
     }
 
-    if ($("#doughnutChart").length) { 
+    if ($("#doughnutChart").length) {
       const doughnutChartCanvas = document.getElementById('doughnutChart');
       new Chart(doughnutChartCanvas, {
         type: 'doughnut',
@@ -417,7 +417,7 @@
       });
     }
 
-    if ($("#leaveReport").length) { 
+    if ($("#leaveReport").length) {
       const leaveReportCanvas = document.getElementById('leaveReport');
       new Chart(leaveReportCanvas, {
         type: 'bar',
@@ -497,14 +497,13 @@
 
 
     if ($.cookie('staradmin2-pro-banner')!="true") {
-      document.querySelector('#proBanner').classList.add('d-flex');
-      document.querySelector('.navbar').classList.remove('fixed-top');
-    }
-    else {
-      document.querySelector('#proBanner').classList.add('d-none');
-      document.querySelector('.navbar').classList.add('fixed-top');
-    }
-    
+        document.querySelector('#proBanner').classList.add('d-flex');
+        document.querySelector('.navbar').classList.remove('fixed-top');
+      }
+      else {
+        document.querySelector('#proBanner').classList.add('d-none');
+        document.querySelector('.navbar').classList.add('fixed-top');
+      }
     if ($( ".navbar" ).hasClass( "fixed-top" )) {
       document.querySelector('.page-body-wrapper').classList.remove('pt-0');
       document.querySelector('.navbar').classList.remove('pt-5');
@@ -513,7 +512,7 @@
       document.querySelector('.page-body-wrapper').classList.add('pt-0');
       document.querySelector('.navbar').classList.add('pt-5');
       document.querySelector('.navbar').classList.add('mt-3');
-      
+
     }
     document.querySelector('#bannerClose').addEventListener('click',function() {
       document.querySelector('#proBanner').classList.add('d-none');
@@ -523,14 +522,14 @@
       document.querySelector('.page-body-wrapper').classList.add('proBanner-padding-top');
       document.querySelector('.navbar').classList.remove('mt-3');
       var date = new Date();
-      date.setTime(date.getTime() + 24 * 60 * 60 * 1000); 
+      date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
       $.cookie('staradmin2-pro-banner', "true", { expires: date });
     });
-    
+
   });
   // iconify.load('icons.svg').then(function() {
   //   iconify(document.querySelector('.my-cool.icon'));
   // });
 
-  
+
 })(jQuery);
