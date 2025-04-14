@@ -65,6 +65,19 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Bạn đã đăng xuất.');
     }
 
+    public function editTacGia(Request $request,$id)
+{
+    $request->validate([
+        'ten_tac_gia' => 'required|string|max:255',
+        'ngay_sinh' => 'required|date',
+    ]);
+    $tacGia = tacgia::findOrFail($id);
+    tacgia->update([
+        'ten_tac_gia' => $request->name,
+        'ngay_sinh' => $request->ngay_sinh,
+    ]);
+    return redirect()->back()->with('success', 'Tác giả đã được cập nhật');
+}
 
 
     public function home()
@@ -139,24 +152,7 @@ public function update(Request $request, $id)
 }
 
 
-public function editTacGia($id)
-{
-    $tacgia = tacgia::findOrFail($id);
-    return view('tacgia.editTacGia', compact('tacgia'));
-}
 
-public function updateTacGia(Request $request, $id)
-{
-    $request->validate([
-        'tentacgia' => 'required|string|max:255',
-    ]);
-
-    $tacgia = tacgia::findOrFail($id);
-    $tacgia->name = $request->tentacgia;
-    $tacgia->save();
-
-    return redirect()->route('showTacGia')->with('success', 'Cập nhật tác giả thành công!');
-}
 
 
 

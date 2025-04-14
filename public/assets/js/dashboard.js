@@ -497,7 +497,12 @@
 
 
     if ($.cookie('staradmin2-pro-banner')!="true") {
-        document.querySelector('#proBanner').classList.add('d-flex');
+        document.addEventListener('DOMContentLoaded', function () {
+            const banner = document.querySelector('#proBanner');
+            if (banner) {
+              banner.classList.add('d-flex');
+            }
+          });
         document.querySelector('.navbar').classList.remove('fixed-top');
       }
       else {
@@ -514,17 +519,27 @@
       document.querySelector('.navbar').classList.add('mt-3');
 
     }
-    document.querySelector('#bannerClose').addEventListener('click',function() {
-      document.querySelector('#proBanner').classList.add('d-none');
-      document.querySelector('#proBanner').classList.remove('d-flex');
-      document.querySelector('.navbar').classList.remove('pt-5');
-      document.querySelector('.navbar').classList.add('fixed-top');
-      document.querySelector('.page-body-wrapper').classList.add('proBanner-padding-top');
-      document.querySelector('.navbar').classList.remove('mt-3');
-      var date = new Date();
-      date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
-      $.cookie('staradmin2-pro-banner', "true", { expires: date });
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const closeBtn = document.querySelector('#bannerClose');
+        const proBanner = document.querySelector('#proBanner');
+        const navbar = document.querySelector('.navbar');
+        const pageBodyWrapper = document.querySelector('.page-body-wrapper');
+
+        if (closeBtn && proBanner && navbar && pageBodyWrapper) {
+          closeBtn.addEventListener('click', function () {
+            proBanner.classList.add('d-none');
+            proBanner.classList.remove('d-flex');
+            navbar.classList.remove('pt-5');
+            navbar.classList.add('fixed-top');
+            pageBodyWrapper.classList.add('proBanner-padding-top');
+            navbar.classList.remove('mt-3');
+
+            const date = new Date();
+            date.setTime(date.getTime() + 24 * 60 * 60 * 1000); // 1 ngày
+            $.cookie('staradmin2-pro-banner', "true", { expires: date });
+          });
+        }
+      });
 
   });
   // iconify.load('icons.svg').then(function() {
