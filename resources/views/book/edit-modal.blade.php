@@ -1,8 +1,8 @@
-<div class="modal fade" id="editBookModal{{$sach->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="editBookModal{{$sach->id}}" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel{{ $sach->id }}" aria-hidden="true">
+    <div class="modal-dialog" id="editBookModal{{$sach->id}}" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Thêm sách</h5>
+          <h5 class="modal-title" id="editBookModalLabel{{ $sach->id }} ">Sửa sách</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

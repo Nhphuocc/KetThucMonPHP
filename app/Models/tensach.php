@@ -9,7 +9,7 @@ class tensach extends Model
 {
     use HasFactory;
     protected $table = 'tensach';
-    protected $fillable = ['TenSach', 'tacgia_id'];
+    protected $fillable = ['ten_sach', 'tacgia_id'];
     public function tacgia()
     {
         return $this->belongsTo(TacGia::class, 'tacgia_id');

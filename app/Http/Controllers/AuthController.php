@@ -99,9 +99,9 @@ class AuthController extends Controller
 
     public function home()
     {
-
+        $users = Auth::user();
         $danhsach_sach = tensach::with('tacgia')->get();
-        return view('page/home', compact('danhsach_sach'));
+        return view('page/home', compact('danhsach_sach','users'));
     }
     public function showchitiet($id)
     {
@@ -127,7 +127,12 @@ class AuthController extends Controller
         return view('admin/user', compact('user'));
     }
 
-
+    public function destroyUser($id)
+    {
+    $user = user::findOrFail($id);
+    $user->delete();
+    return redirect()->back()->with('success', 'Đã xoá thành công!');
+    }
 
     public function destroySach($id)
     {
@@ -156,6 +161,19 @@ class AuthController extends Controller
     $sachmoi->Noi_dung = $request->Noi_dung;
     $sachmoi->save();
     return redirect()->route('admin')->with('success', 'Đã thêm sách thành công!');
+    }
+
+    public function addTacGia(Request $request)
+    {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'ngay_sinh' => 'required|date',
+    ]);
+    $tacgiamoi = new tacgia();
+    $tacgiamoi->name = $request->name;
+    $tacgiamoi->ngay_sinh = $request->ngay_sinh;
+    $tacgiamoi->save();
+    return redirect()->back()->with('success', 'Tác giả đã được thêm thành công');
     }
 }
 
